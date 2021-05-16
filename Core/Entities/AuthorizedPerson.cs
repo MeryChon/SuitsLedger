@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Entities
+namespace Core.Entities
 {
     public class AuthorizedPerson
     {

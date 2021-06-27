@@ -1,4 +1,6 @@
+using Core.Interfaces.Repositories;
 using Infrastructure.Data;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +25,11 @@ namespace API
         {
 
             services.AddControllers();
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
             services.AddDbContext<SuitLedgerContext>(optionsBuilder => optionsBuilder.UseSqlServer(Configuration.GetConnectionString("MSSQLConnection")));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });

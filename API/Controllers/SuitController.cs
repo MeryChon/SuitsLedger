@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Infrastructure.Data;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Core.Interfaces.Repositories;
+using Core.Specifications.Suits;
 
 namespace API.Controllers
 {
@@ -11,26 +11,28 @@ namespace API.Controllers
     public class SuitController : Controller
     {
 
-        private readonly SuitLedgerContext _db;
+        private readonly IGenericRepository<Suit> _suitRepository;
 
-        public SuitController(SuitLedgerContext dbContext)
+        public SuitController(IGenericRepository<Suit> suitRepository)
         {
-            _db = dbContext;
+            _suitRepository = suitRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Suit>>> GetSuits()
         {
-            var suits = await _db.Suits.ToListAsync();
+            var specification = new SuitWithAuthorizedPerson();
 
-            return Ok(suits);
+            return Ok(await _suitRepository.ListAsync(specification));
         }
 
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Suit>> GetSuit(int id)
         {
-            return await _db.Suits.FindAsync(id);
+            var specification = new SuitWithAuthorizedPerson();
+
+            return await _suitRepository.GetEntityWithSpecification(specification);
         }
     }
 }

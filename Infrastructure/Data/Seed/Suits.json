@@ -1,0 +1,23 @@
+[
+  {
+    "RegistrationDate": "01-05-20",
+    "ActionStartDate": "15-05-20",
+    "LimitationPerion": 30,
+    "Status": 1,
+    "AuthorizedPersonId": 1
+  },
+  {
+    "RegistrationDate": "12-03-21",
+    "ActionStartDate": "09-04-21",
+    "LimitationPerion": 90,
+    "Status": 1,
+    "AuthorizedPersonId": 2
+  },
+  {
+    "RegistrationDate": "20-05-21",
+    "ActionStartDate": "05-06-21",
+    "LimitationPerion": 45,
+    "Status": 0,
+    "AuthorizedPersonId": 1
+  }
+]

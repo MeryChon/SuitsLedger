@@ -1,0 +1,29 @@
+[
+  {
+    "FirstName": "Jane",
+    "LastName": "Dane",
+    "Name": "",
+    "IdentificationNumber": 1020304123,
+    "City": "Tbilisi",
+    "Phone": "0203123123",
+    "PersonType": 0
+  },
+  {
+    "FirstName": "John",
+    "LastName": "Doe",
+    "Name": "",
+    "IdentificationNumber": 1004050198,
+    "City": "Tbilisi",
+    "Phone": "0123982311",
+    "PersonType": 0
+  },
+  {
+    "FirstName": "",
+    "LastName": "",
+    "Name": "Sunrise Consulting",
+    "IdentificationNumber": "10101-00",
+    "City": "Tbilisi",
+    "Phone": "0322101030",
+    "PersonType": 1
+  }
+]

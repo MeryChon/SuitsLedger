@@ -12,6 +12,8 @@ namespace Infrastructure.Data.Configs
 
             builder.Property(s => s.RegistrationDate).IsRequired();
 
+            builder.Property(s => s.LimitationPeriod).HasDefaultValue(30);
+
             builder.HasOne(s => s.AuthorizedPerson).WithMany(ap => ap.Suits).HasForeignKey(s => s.AuthorizedPersonId);
         }
     }

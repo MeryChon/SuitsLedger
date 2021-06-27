@@ -34,7 +34,7 @@ namespace Infrastructure.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ActionStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LimitationPerion = table.Column<int>(type: "int", nullable: false),
+                    LimitationPeriod = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     AuthorizedPersonId = table.Column<int>(type: "int", nullable: false)
                 },

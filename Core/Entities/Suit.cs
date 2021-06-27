@@ -1,6 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Core.Entities.Base;
+using System.Text.Json.Serialization;
+
 
 namespace Core.Entities
 {
@@ -10,13 +13,15 @@ namespace Core.Entities
         public DateTime RegistrationDate { get; set; }
 
         public DateTime? ActionStartDate { get; set; }
-        
-        public int LimitationPerion { get; set; }  // TODO: is this number of days or a date?
-        
-        public SuitStatus Status { get; set; } // TODO: make this an enum
+
+        [Column("LimitationPeriod")]
+        public int LimitationPeriod { get; set; }  // TODO: is this number of days or a date?
+
+        public SuitStatus Status { get; set; }
 
         public int AuthorizedPersonId { get; set; }
-        
+
+        [JsonIgnore]
         public AuthorizedPerson AuthorizedPerson { get; set; }
     }
 }

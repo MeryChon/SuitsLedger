@@ -16,7 +16,7 @@ namespace Infrastructure.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Core.Entities.AuthorizedPerson", b =>
@@ -72,13 +72,19 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("AuthorizedPersonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LimitationPerion")
-                        .HasColumnType("int");
+                    b.Property<int>("LimitationPeriod")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(30)
+                        .HasColumnName("LimitationPeriod");
 
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Temporary")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

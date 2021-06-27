@@ -21,7 +21,7 @@ namespace Core.Entities
         public string Phone { get; set; } // comma-separated
 
         public PersonType Type { get; set; }
-        
-        public ICollection<Suit> Suits {get; set;}
+
+        public ICollection<Suit> Suits { get; set; }
     }
 }

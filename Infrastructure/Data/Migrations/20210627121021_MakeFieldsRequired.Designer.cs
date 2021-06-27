@@ -74,7 +74,7 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("AuthorizedPersonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LimitationPerion")
+                    b.Property<int>("LimitationPeriod")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RegistrationDate")

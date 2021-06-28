@@ -19,9 +19,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Suit>>> GetSuits()
+        public async Task<ActionResult<List<Suit>>> GetSuits(SuitSpecificationParams filter)
         {
-            var specification = new SuitWithAuthorizedPerson();
+            var specification = new SuitWithAuthorizedPersonsSpecification(filter);
 
             return Ok(await _suitRepository.ListAsync(specification));
         }
@@ -30,7 +30,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Suit>> GetSuit(int id)
         {
-            var specification = new SuitWithAuthorizedPerson();
+            var specification = new SuitWithAuthorizedPersonsSpecification(id);
 
             return await _suitRepository.GetEntityWithSpecification(specification);
         }

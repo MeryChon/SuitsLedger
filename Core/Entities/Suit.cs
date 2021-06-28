@@ -23,5 +23,7 @@ namespace Core.Entities
 
         [JsonIgnore]
         public AuthorizedPerson AuthorizedPerson { get; set; }
+
+        // public string Description { get; set; }
     }
 }

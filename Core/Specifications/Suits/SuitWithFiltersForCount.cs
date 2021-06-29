@@ -10,7 +10,8 @@ namespace Core.Specifications.Suits
         base(x =>
         (string.IsNullOrEmpty(suitParams.Search) || x.Description.ToLower().Contains(suitParams.Search.ToLower()))
         && (string.IsNullOrEmpty(suitParams.AuthorizedPersonName) || AuthorizedPersonNameContains(x.AuthorizedPerson, suitParams.AuthorizedPersonName))
-        && (!suitParams.AuthorizedPersonId.HasValue || x.AuthorizedPersonId == suitParams.AuthorizedPersonId))
+        && (!suitParams.AuthorizedPersonId.HasValue || x.AuthorizedPersonId == suitParams.AuthorizedPersonId)
+        && (!suitParams.Status.HasValue) || x.Status == suitParams.Status)
         {
 
         }

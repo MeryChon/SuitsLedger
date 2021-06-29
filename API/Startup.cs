@@ -1,3 +1,4 @@
+using API.Helper;
 using Core.Interfaces.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
@@ -26,6 +27,8 @@ namespace API
         {
 
             services.AddControllers();
+
+            services.AddAutoMapper(typeof(MappingProfiles));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

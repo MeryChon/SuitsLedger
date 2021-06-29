@@ -4,6 +4,9 @@ using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Core.Interfaces.Repositories;
 using Core.Specifications.Suits;
+using AutoMapper;
+using API.DTOs;
+using API.Helper;
 
 namespace API.Controllers
 {
@@ -13,17 +16,28 @@ namespace API.Controllers
 
         private readonly IGenericRepository<Suit> _suitRepository;
 
-        public SuitController(IGenericRepository<Suit> suitRepository)
+        private readonly IMapper _mapper;
+
+        public SuitController(IGenericRepository<Suit> suitRepository, IMapper mapper)
         {
             _suitRepository = suitRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Suit>>> GetSuits(SuitSpecificationParams filter)
+        public async Task<ActionResult<Pagination<SuitToReturnDTO>>> GetSuits([FromQuery] SuitSpecificationParams filter)
         {
             var specification = new SuitWithAuthorizedPersonsSpecification(filter);
 
-            return Ok(await _suitRepository.ListAsync(specification));
+            var countSpecification = new SuitWithFiltersForCount(filter);
+
+            var totalItems = await _suitRepository.CountAsync(countSpecification);
+
+            var suits = await _suitRepository.ListAsync(specification);
+
+            var data = _mapper.Map<IReadOnlyList<SuitToReturnDTO>>(suits);
+
+            return Ok(new Pagination<SuitToReturnDTO>(filter.PageIndex, filter.PageSize, totalItems, data));
         }
 
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Core.Entities.Base;
 
 namespace Core.Entities
@@ -11,6 +12,20 @@ namespace Core.Entities
         public string LastName { get; set; }
 
         public string Name { get; set; }
+
+        [NotMapped]
+        public string DisplayName
+        {
+            get
+            {
+                if (this.Type == PersonType.PHYSICAL)
+                {
+                    return this.Name;
+                }
+                return this.FirstName + " " + this.LastName;
+            }
+        }
+
         [Required]
         public string IdentificationNumber { get; set; }
 

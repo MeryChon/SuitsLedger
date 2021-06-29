@@ -9,7 +9,7 @@ namespace Core.Specifications.Suits
         {
             AddInclude(s => s.AuthorizedPerson);
 
-            ApplyPaging(suitParams.PageSize * (suitParams.PageIndex - 1), suitParams.PageSize);
+            ApplyPaging(suitParams.PageSize * suitParams.PageIndex, suitParams.PageSize);
 
             if (!string.IsNullOrEmpty(suitParams.Sort))
             {
@@ -23,6 +23,12 @@ namespace Core.Specifications.Suits
                         break;
                     case "DescriptionDesc":
                         AddOrderByDesc(s => s.Description);
+                        break;
+                    case "LimitationPeriodAsc":
+                        AddOrderBy(s => s.LimitationPeriod);
+                        break;
+                    case "LimitationPeriodDesc":
+                        AddOrderByDesc(s => s.LimitationPeriod);
                         break;
                     case "RegistrationDateDesc":
                     default:

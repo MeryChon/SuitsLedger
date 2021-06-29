@@ -15,16 +15,16 @@ namespace Core.Specifications.Suits
             {
                 switch (suitParams.Sort)
                 {
-                    case "RegistrationDataAsc":
+                    case "RegistrationDateAsc":
                         AddOrderBy(s => s.RegistrationDate);
                         break;
-                    // case "DescriptionAsc":
-                    //     AddOrderBy(s => s.Description);
-                    //     break;
-                    // case "DescriptionDesc":
-                    //     AddOrderByDesc(s => s.Description);
-                    //     break;
-                    case "RegistrationDataDesc":
+                    case "DescriptionAsc":
+                        AddOrderBy(s => s.Description);
+                        break;
+                    case "DescriptionDesc":
+                        AddOrderByDesc(s => s.Description);
+                        break;
+                    case "RegistrationDateDesc":
                     default:
                         AddOrderByDesc(s => s.RegistrationDate);
                         break;

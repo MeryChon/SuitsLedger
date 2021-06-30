@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -64,11 +65,20 @@ namespace Infrastructure.Repositories
             foreach (PropertyInfo propInfo in propertyInfos)
             {
                 var propValue = propInfo.GetValue(item);
-                propInfo.SetValue(currentItem.Result, propValue);
+                if (propValue != null && !IsNotMappedProperty(propInfo))
+                {
+                    propInfo.SetValue(currentItem.Result, propValue);
+                }
             }
 
             await _context.SaveChangesAsync();
             return await _context.FindAsync<T>(item.Id); // TODO: There should be a way of wrapping item in Task
+        }
+
+        private bool IsNotMappedProperty(PropertyInfo propertyInfo)
+        {
+            var customAttributes = propertyInfo.GetCustomAttributes(typeof(NotMappedAttribute), true);
+            return customAttributes.Count() >= 1;
         }
 
         public void Delete(int id)

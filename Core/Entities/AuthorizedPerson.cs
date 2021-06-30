@@ -18,7 +18,7 @@ namespace Core.Entities
         {
             get
             {
-                if (this.Type == PersonType.PHYSICAL)
+                if (this.Type == PersonType.LEGAL)
                 {
                     return this.Name;
                 }

@@ -12,8 +12,6 @@ namespace Core.Specifications.AuthorizedPerson
 
         public int PageSize { get => _pageSize; set => _pageSize = (value > MAX_PAGE_SIZE ? MAX_PAGE_SIZE : value); }
 
-        public string AuthorizedPersonName { get; set; }
-
         public string IdentificationNumber { get; set; }
 
         public PersonType? Type { get; set; }

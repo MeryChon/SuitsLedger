@@ -9,7 +9,10 @@ namespace Core.Specifications.Suits
         public SuitWithAuthorizedPersonsSpecification(SuitSpecificationParams suitParams)
          : base(x =>
         (string.IsNullOrEmpty(suitParams.Search) || x.Description.ToLower().Contains(suitParams.Search.ToLower()))
-        && (string.IsNullOrEmpty(suitParams.AuthorizedPersonName) || AuthorizedPersonUtils.AuthorizedPersonNameContains(x.AuthorizedPerson, suitParams.AuthorizedPersonName))
+        && (string.IsNullOrEmpty(suitParams.AuthorizedPersonName)
+        || x.AuthorizedPerson.FirstName.ToLower().Contains(suitParams.AuthorizedPersonName.ToLower())
+        || x.AuthorizedPerson.LastName.ToLower().Contains(suitParams.AuthorizedPersonName.ToLower())
+        || (x.AuthorizedPerson.Name != null && x.AuthorizedPerson.Name.ToLower().Contains(suitParams.AuthorizedPersonName.ToLower())))
         && (!suitParams.AuthorizedPersonId.HasValue || x.AuthorizedPersonId == suitParams.AuthorizedPersonId)
         && (!suitParams.Status.HasValue) || x.Status == suitParams.Status)
         {

@@ -11,12 +11,12 @@ namespace API.Helper
         {
             // Suit
             CreateMap<Suit, SuitToReturnDTO>()
-            .ForMember(s => s.AuthorizedPerson, o => o.MapFrom(src => src.AuthorizedPerson.DisplayName));
-
+                .ForMember(s => s.AuthorizedPerson, o => o.MapFrom(src => src.AuthorizedPerson.DisplayName));
             CreateMap<SuitDTO, Suit>().ReverseMap();
 
             // Authorized Person
             CreateMap<AuthorizedPerson, AuthorizedPersonToReturnDTO>();
+            CreateMap<AuthorizedPersonDTO, AuthorizedPerson>().ReverseMap();
         }
 
     }

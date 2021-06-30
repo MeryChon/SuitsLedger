@@ -9,11 +9,14 @@ namespace API.Helper
 
         public MappingProfiles()
         {
+            // Suit
             CreateMap<Suit, SuitToReturnDTO>()
             .ForMember(s => s.AuthorizedPerson, o => o.MapFrom(src => src.AuthorizedPerson.DisplayName));
 
             CreateMap<SuitDTO, Suit>().ReverseMap();
 
+            // Authorized Person
+            CreateMap<AuthorizedPerson, AuthorizedPersonToReturnDTO>();
         }
 
     }

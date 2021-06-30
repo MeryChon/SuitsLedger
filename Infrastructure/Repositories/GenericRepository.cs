@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Core.Entities.Base;
 using Core.Interfaces.Repositories;
@@ -46,6 +47,35 @@ namespace Infrastructure.Repositories
         public async Task<int> CountAsync(ISpecification<T> specification)
         {
             return await ApplySpecification(specification).CountAsync();
+        }
+
+        public async Task<T> Create(T item)
+        {
+            var createdItem = await _context.AddAsync<T>(item);
+            await _context.SaveChangesAsync();
+            return createdItem.Entity;
+        }
+
+        public async Task<T> Update(T item)
+        {
+            var currentItem = _context.FindAsync<T>(item.Id);
+            PropertyInfo[] propertyInfos = typeof(T).GetProperties();
+
+            foreach (PropertyInfo propInfo in propertyInfos)
+            {
+                var propValue = propInfo.GetValue(item);
+                propInfo.SetValue(currentItem.Result, propValue);
+            }
+
+            await _context.SaveChangesAsync();
+            return await _context.FindAsync<T>(item.Id); // TODO: There should be a way of wrapping item in Task
+        }
+
+        public void Delete(int id)
+        {
+            T item = _context.Find<T>(id);
+            _context.Set<T>().Remove(item);
+            _context.SaveChanges();
         }
     }
 }

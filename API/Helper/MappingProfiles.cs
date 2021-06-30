@@ -11,6 +11,9 @@ namespace API.Helper
         {
             CreateMap<Suit, SuitToReturnDTO>()
             .ForMember(s => s.AuthorizedPerson, o => o.MapFrom(src => src.AuthorizedPerson.DisplayName));
+
+            CreateMap<SuitDTO, Suit>().ReverseMap();
+
         }
 
     }

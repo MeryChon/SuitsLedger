@@ -48,5 +48,28 @@ namespace API.Controllers
 
             return await _suitRepository.GetEntityWithSpecification(specification);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Suit>> CreateSuit(SuitDTO model)
+        {
+            var suit = _mapper.Map<Suit>(model);
+            var createdSuit = await _suitRepository.Create(suit);
+            return Ok(createdSuit);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Suit>> UpdateSuit(int id, SuitDTO model)
+        {
+            Suit suit = _mapper.Map<Suit>(model);
+            suit.Id = id;
+            var updatedSuit = await _suitRepository.Update(suit);
+            return Ok(updatedSuit);
+        }
+
+        [HttpDelete("{id}")]
+        public void DeleteSuit(int id)
+        {
+            _suitRepository.Delete(id);
+        }
     }
 }
